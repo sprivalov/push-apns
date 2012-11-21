@@ -24,14 +24,16 @@ module Push
 
     def attributes_for_device=(attrs)
       raise ArgumentError, "attributes_for_device must be a Hash" if !attrs.is_a?(Hash)
+      properties ||= {}
       properties[:attributes_for_device] = MultiJson.dump(attrs)
     end
 
     def attributes_for_device
-      MultiJson.load(properties[:attributes_for_device]) if properties[:attributes_for_device]
+      MultiJson.load(properties[:attributes_for_device]) if properties && properties[:attributes_for_device]
     end
 
     def alert=(alert)
+      properties ||= {}
       if alert.is_a?(Hash)
         properties[:alert] = MultiJson.dump(alert)
       else
@@ -40,7 +42,7 @@ module Push
     end
 
     def alert
-      string_or_json = properties[:alert]
+      string_or_json = properties[:alert] if properties
       MultiJson.load(string_or_json) rescue string_or_json
     end
 
