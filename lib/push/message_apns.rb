@@ -32,12 +32,12 @@ module Push
       MultiJson.load(properties[:attributes_for_device]) if properties && properties[:attributes_for_device]
     end
 
-    def alert=(alert)
+    def alert=(msg)
       properties ||= {}
-      if alert.is_a?(Hash)
-        properties[:alert] = MultiJson.dump(alert)
+      if msg.is_a?(Hash)
+        properties[:alert] = MultiJson.dump(msg)
       else
-        properties[:alert] = alert
+        properties[:alert] = msg
       end
     end
 
