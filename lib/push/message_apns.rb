@@ -19,7 +19,7 @@ module Push
 
     validates :badge, :numericality => true, :allow_nil => true
     validates :expiry, :numericality => true, :presence => true
-    validates :device, :format => { :with => /\A[a-z0-9]{64}\z/ }
+    validates :device, :format => { :with => /\A[a-zA-Z0-9]{64}\z/ }
     validates_with Push::Apns::BinaryNotificationValidator
 
     def attributes_for_device=(attrs)
